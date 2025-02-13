@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-
+import {MatDialog} from "@angular/material/dialog";
+import {DeleteModalComponent} from "../component/delete-modal/delete-modal.component";
 
 
 interface Task {
@@ -8,8 +9,6 @@ interface Task {
   completed: boolean;
   id: number;
 }
-
-
 
 @Component({
   selector: 'app-todo-list',
@@ -19,17 +18,28 @@ interface Task {
 
 
 
-export class TodoListComponent {
-  todoForm: FormGroup;
-  tasks: Task[] = [];
-  filter: string = 'all';
-  editingIndex: number | null = null;
+export class TodoListComponent implements OnInit{
+ public todoForm: FormGroup;
+ private  tasks: Task[] ;
+ public  filter: string ;
+ public filteredTasks: { name: string; completed: boolean }[]  ;
+ public  messages: string[] = [];
+ private editingIndex: number | null ;
+  private dialog = inject(MatDialog);
 
   constructor(private fb: FormBuilder) {
     this.todoForm = this.fb.group({ taskName: [''] });
-    this.loadTasks();
+    this.tasks=[];
+    this.filter ='all';
+    this.filteredTasks = [];
+    this.editingIndex = null;
   }
 
+
+  ngOnInit() {
+    this.loadTasks();
+    this.applyFilter(); // Apply filter on init
+  }
 
   addOrUpdateTask() {
     const taskName = this.todoForm.value.taskName.trim();
@@ -40,9 +50,8 @@ export class TodoListComponent {
       this.tasks.push({ name: taskName, completed: false, id });
     } else {
       this.tasks[this.editingIndex].name = taskName;
-      this.editingIndex = null; // Reset editing mode
+      this.editingIndex = null;
     }
-
 
     this.saveTasks();
     this.applyFilter();
@@ -52,15 +61,28 @@ export class TodoListComponent {
 
 
   toggleTask(index: number) {
-    this.tasks[index].completed = !this.tasks[index].completed;
+    this.filteredTasks[index].completed = !this.filteredTasks[index].completed;
     this.saveTasks();
     this.applyFilter();
   }
 
+
+
   deleteTask(index: number) {
-    this.tasks.splice(index, 1);
-    this.saveTasks();
-    this.applyFilter();
+
+    const dialogRef = this.dialog.open(DeleteModalComponent, {
+      data: {id: index},
+    });
+
+    dialogRef.afterClosed().subscribe(index => {
+      if (index !== undefined) {
+        this.tasks.splice(index, 1);
+        this.saveTasks();
+        this.applyFilter();
+      }
+    });
+
+
   }
 
   setFilter(filter: string) {
@@ -69,17 +91,31 @@ export class TodoListComponent {
   }
 
   applyFilter() {
-    let allTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-
     switch (this.filter) {
       case 'active':
-        this.tasks = allTasks.filter((task: { completed: any; }) => !task.completed);
+        this.filteredTasks = this.tasks.filter((task) => !task.completed);
+        this.updateMessages('active');
         break;
       case 'completed':
-        this.tasks = allTasks.filter((task: { completed: any; }) => task.completed);
+        this.filteredTasks = this.tasks.filter((task) => task.completed);
+        this.updateMessages('completed');
         break;
       default:
-        this.tasks = allTasks;
+        this.filteredTasks = [...this.tasks];
+        this.updateMessages('all');
+    }
+  }
+
+  updateMessages(filter: string) {
+    this.messages = []; // Reset messages
+    if (this.filteredTasks.length === 0) {
+      if (filter === 'all') {
+        this.messages.push('No Tasks', 'Add a new task!');
+      } else if (filter === 'active') {
+        this.messages.push('No Active Tasks');
+      } else if (filter === 'completed') {
+        this.messages.push('No Completed Tasks');
+      }
     }
   }
 

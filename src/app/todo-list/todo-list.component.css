@@ -10,16 +10,46 @@
   .todo-container{
     margin: auto;
     height: 100vh;
-    width: 50vw;
+    width: 47vw;
     overflow: hidden;
     background: antiquewhite;
   }
+
+
+
+  .list-container {
+    height: 61vh;
+    overflow-y: auto;
+  }
+
+  .list-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .list-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 4px;
+  }
+
+  .list-container::-webkit-scrollbar-thumb {
+    background-color: #6d5d4e;
+    border-radius: 4px;
+  }
+
+  .list-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
 
 
   .input-container{
     width: 83%;
   }
 
+
+   mat-form-field input {
+    font-size: 1.8rem; /* Adjust font size as needed */
+  }
 
 
   .todo-title{
@@ -69,7 +99,7 @@
   }
   li .task-title .task-title-sp {
     margin-right: 5px;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #6d5d4e;
   }
   li > .task-title {
@@ -78,6 +108,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 97%;
   }
   li > .task-checkbox {
     float: left;
@@ -129,9 +160,9 @@
 
 
   .select-container{
-    width: 7rem;
-    font-size: 1rem;
-    height: 1.5rem;
+    width: 10rem;
+    font-size: 1.5rem;
+    height: 2rem;
   }
 
   input[type=checkbox], input[type=radio] {
@@ -176,7 +207,7 @@
 
 
   .filters{
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     text-align: end;
   }
 
@@ -184,15 +215,17 @@
     display: flex;
     align-items: center;
     gap: 5%;
+    width: 80%;
   }
 
 
   .no-data{
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-top: 5rem;
     color: #6d5d4e;
     font-weight: 500;
+    line-height: 1;
   }
 
 
@@ -203,5 +236,15 @@
     align-content: center;
     margin: 3%;
   }
+
+  .list-child {
+    font-size: 1.8rem !important;
+    cursor: pointer; /* Make it clickable */
+    accent-color: #6d5d4e; /* Change checkbox color */
+  }
+
+
+
+
 
 }

@@ -8,7 +8,6 @@
     <mat-form-field  style="width: 93%">
       <input formControlName="taskName"  matInput placeholder="Enter Task" >
     </mat-form-field>
-    <!--    <button type="submit">Add</button>-->
     <button style="margin-left: 1%" type="submit"  mat-fab aria-label="Add Task"  >
       <mat-icon>add</mat-icon>
     </button>
@@ -17,7 +16,7 @@
 
 
   <div class="filters">
-    <label style="font-size: 1.2rem" for="taskFilter">Filter: </label>
+    <label style="font-size: 1.6rem" for="taskFilter">Filter: </label>
     <select id="taskFilter" class="form-control select-container" [(ngModel)]="filter" (change)="setFilter(filter)">
       <option value="all">All</option>
       <option value="active">Active</option>
@@ -28,20 +27,20 @@
 
   </div>
 
-  <ul *ngIf="tasks.length !== 0" >
+  <ul class="list-container" *ngIf="filteredTasks.length !== 0" >
 
-    <li    class="list-primary" *ngFor="let task of tasks; let i = index">
+    <li    class="list-primary" *ngFor="let task of filteredTasks; let i = index">
 
       <div class="task-title">
-        <div class="input-title-container" >
+        <div  class="input-title-container" >
           <input type="checkbox" class="list-child" value="" [ngModel]='task.completed' (change)="toggleTask(i)">
-          <span  class="task-title-sp">{{task.name }} </span>
+          <span [appStrikeThrough]="task.completed"  class="task-title-sp">{{task.name |titleCase }} </span>
 
         </div>
 
         <div class="pull-right hidden-phone">
-          <button  (click)="editTask(i)"  style="font-size: 20px" class="btn btn-primary btn-xs fa fa-pencil"></button>
-          <button (mouseup)='deleteTask(i)'  style="font-size: 20px;margin-left: 0.3rem" class="btn btn-danger btn-xs fa fa-trash-o"></button>
+          <button  (click)="editTask(i)"  style="font-size: 1.5rem" class="btn btn-primary btn-xs fa fa-pencil"></button>
+          <button (mouseup)='deleteTask(i)'  style="font-size: 1.5rem;margin-left: 0.5rem" class="btn btn-danger btn-xs fa fa-trash-o"></button>
         </div>
       </div>
 
@@ -52,6 +51,10 @@
 
   </ul>
 
-  <div  class="no-data"  *ngIf="tasks.length === 0">No Tasks ,Please Add </div>
+
+  <div class="no-data" *ngIf="messages.length > 0">
+    <div *ngFor="let message of messages">{{ message }}</div>
+  </div>
+
 </div>
 </div>

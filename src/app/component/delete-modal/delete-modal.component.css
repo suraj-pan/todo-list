@@ -1,0 +1,7 @@
+:host {
+  .click-btn{
+    background: antiquewhite;
+    width: 48%;
+    font-size: 1.5rem;
+  }
+}
