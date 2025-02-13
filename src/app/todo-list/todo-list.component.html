@@ -1,0 +1,57 @@
+
+<div class="todo-container">
+
+  <div class="todo-title">To-Do List</div>
+
+<div  class="todo-main-container" >
+  <form style="display: flex"   [formGroup]="todoForm" (ngSubmit)="addOrUpdateTask()">
+    <mat-form-field  style="width: 93%">
+      <input formControlName="taskName"  matInput placeholder="Enter Task" >
+    </mat-form-field>
+    <!--    <button type="submit">Add</button>-->
+    <button style="margin-left: 1%" type="submit"  mat-fab aria-label="Add Task"  >
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </form>
+
+
+  <div class="filters">
+    <label style="font-size: 1.2rem" for="taskFilter">Filter: </label>
+    <select id="taskFilter" class="form-control select-container" [(ngModel)]="filter" (change)="setFilter(filter)">
+      <option value="all">All</option>
+      <option value="active">Active</option>
+      <option value="completed">Completed</option>
+    </select>
+
+
+
+  </div>
+
+  <ul *ngIf="tasks.length !== 0" >
+
+    <li    class="list-primary" *ngFor="let task of tasks; let i = index">
+
+      <div class="task-title">
+        <div class="input-title-container" >
+          <input type="checkbox" class="list-child" value="" [ngModel]='task.completed' (change)="toggleTask(i)">
+          <span  class="task-title-sp">{{task.name }} </span>
+
+        </div>
+
+        <div class="pull-right hidden-phone">
+          <button  (click)="editTask(i)"  style="font-size: 20px" class="btn btn-primary btn-xs fa fa-pencil"></button>
+          <button (mouseup)='deleteTask(i)'  style="font-size: 20px;margin-left: 0.3rem" class="btn btn-danger btn-xs fa fa-trash-o"></button>
+        </div>
+      </div>
+
+
+
+    </li>
+
+
+  </ul>
+
+  <div  class="no-data"  *ngIf="tasks.length === 0">No Tasks ,Please Add </div>
+</div>
+</div>

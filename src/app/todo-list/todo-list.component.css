@@ -1,0 +1,207 @@
+@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
+:host {
+  .todo-header{
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 4rem;
+  }
+
+  .todo-container{
+    margin: auto;
+    height: 100vh;
+    width: 50vw;
+    overflow: hidden;
+    background: antiquewhite;
+  }
+
+
+  .input-container{
+    width: 83%;
+  }
+
+
+
+  .todo-title{
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bold;
+    color: #6d5d4e;
+    margin-top: 2rem;
+    margin-bottom: 6rem;
+  }
+
+
+  .form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+
+
+  ul     {
+    list-style-type: none;
+    margin: 0 0 20px 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  ul li {
+    list-style: none;
+  }
+  li i {
+    position: absolute;
+    left: 6px;
+    padding: 4px 10px 0 10px;
+    cursor: pointer;
+  }
+  li.list-primary {
+    border-left: 3px solid rgb(109, 93, 78);
+    list-style: none;
+    padding: 15px 0 15px 35px !important;
+    position: relative;
+    background: #f5f6f8;
+    margin-bottom: 2px;
+    border-bottom: none !important;
+  }
+  li .task-title .task-title-sp {
+    margin-right: 5px;
+    font-size: 2rem;
+    color: #6d5d4e;
+  }
+  li > .task-title {
+    overflow: hidden;
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  li > .task-checkbox {
+    float: left;
+    width: 30px;
+  }
+  .pull-right {
+    float: right!important;
+  }
+
+
+
+  .btn-danger {
+    background-color: #ff6c60;
+    border-color: #ff6c60;
+    color: #FFFFFF;
+  }
+  .btn-primary, .btn-primary.disabled, .btn-primary[disabled], .btn-primary.disabled.active, .btn-primary.active[disabled] {
+    background-color: #e0c6a4;
+    border-color: #e0c6a4;
+    color: #FFFFFF;
+  }
+  .btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+  .btn-group-xs>.btn, .btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+  }
+
+
+  .select-container{
+    width: 7rem;
+    font-size: 1rem;
+    height: 1.5rem;
+  }
+
+  input[type=checkbox], input[type=radio] {
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: inherit;
+    width: 1em;
+    margin: 0;
+    color: inherit;
+    outline: none;
+    font-family: 'FontAwesome';
+    transition: 300ms ease-out;
+    cursor: pointer;
+    font-size: 18px;
+
+    /*color: wheat;*/
+  }
+  input[type=checkbox]:checked::after {
+    content: '\f05d';
+  }
+  input[type=radio]:checked::after {
+    content: '\f192';
+  }
+  input[type=checkbox]::after,
+  input[type=radio]::after {
+    content: '\f10c ';
+    display: inline-block;
+    text-align: center;
+    width: 1em;
+  }
+  input[type=checkbox]:checked::after,
+  input[type=radio]:checked::after {
+    font-weight: 900;
+  }
+  .input[type=checkbox]:active,
+  input[type=radio]:active {
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+  }
+
+
+  .filters{
+    margin-bottom: 0.5rem;
+    text-align: end;
+  }
+
+  .input-title-container{
+    display: flex;
+    align-items: center;
+    gap: 5%;
+  }
+
+
+  .no-data{
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 5rem;
+    color: #6d5d4e;
+    font-weight: 500;
+  }
+
+
+  .todo-main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: 3%;
+  }
+
+}
