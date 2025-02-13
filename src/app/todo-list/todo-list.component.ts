@@ -22,8 +22,8 @@ export class TodoListComponent implements OnInit{
  public todoForm: FormGroup;
  private  tasks: Task[] ;
  public  filter: string ;
- public filteredTasks: any[]  ;
- public  messages: string[] = [];
+ public filteredTasks: Task[]  ;
+ public  messages: string[] ;
  private editingIndex: number | null ;
   private dialog = inject(MatDialog);
 
@@ -33,6 +33,7 @@ export class TodoListComponent implements OnInit{
     this.filter ='all';
     this.filteredTasks = [];
     this.editingIndex = null;
+    this.messages = [];
   }
 
 
@@ -43,7 +44,12 @@ export class TodoListComponent implements OnInit{
 
   addOrUpdateTask() {
     const taskName = this.todoForm.value.taskName.trim();
-    if (!taskName) return;
+
+
+    if (!taskName){
+      alert("Task name cannot be empty! Please enter a valid task.");
+      return;
+    }
 
     if (this.editingIndex === null) {
       let id = Math.floor(Math.random() * 1000);
@@ -75,7 +81,6 @@ export class TodoListComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(id => {
-      debugger
       const index = this.tasks.findIndex(task => task.id === id);
       if (index !== -1) {
         this.tasks.splice(index, 1);

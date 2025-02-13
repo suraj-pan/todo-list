@@ -33,7 +33,7 @@
           <input type="checkbox" class="list-child" value="" [ngModel]='task.completed' (change)="toggleTask(i)">
           <span [appStrikeThrough]="task.completed"  class="task-title-sp">{{task.name |titleCase }} </span>
         </div>
-        <div class="pull-right hidden-phone">
+        <div class="pull-right">
           <button  (click)="editTask(task.id)"  style="font-size: 1.5rem" class="btn btn-primary btn-xs fa fa-pencil"></button>
           <button (mouseup)='deleteTask(task.id)'  style="font-size: 1.5rem;margin-left: 0.5rem" class="btn btn-danger btn-xs fa fa-trash-o"></button>
         </div>
