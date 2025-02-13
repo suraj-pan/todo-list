@@ -22,7 +22,7 @@ export class TodoListComponent implements OnInit{
  public todoForm: FormGroup;
  private  tasks: Task[] ;
  public  filter: string ;
- public filteredTasks: { name: string; completed: boolean }[]  ;
+ public filteredTasks: any[]  ;
  public  messages: string[] = [];
  private editingIndex: number | null ;
   private dialog = inject(MatDialog);
@@ -68,14 +68,16 @@ export class TodoListComponent implements OnInit{
 
 
 
-  deleteTask(index: number) {
+  deleteTask(id: number) {
 
     const dialogRef = this.dialog.open(DeleteModalComponent, {
-      data: {id: index},
+      data: {id: id},
     });
 
-    dialogRef.afterClosed().subscribe(index => {
-      if (index !== undefined) {
+    dialogRef.afterClosed().subscribe(id => {
+      debugger
+      const index = this.tasks.findIndex(task => task.id === id);
+      if (index !== -1) {
         this.tasks.splice(index, 1);
         this.saveTasks();
         this.applyFilter();
@@ -119,7 +121,8 @@ export class TodoListComponent implements OnInit{
     }
   }
 
-  editTask(index: number) {
+  editTask(id: number) {
+    const index = this.tasks.findIndex(task => task.id === id);
     this.editingIndex = index;
     this.todoForm.patchValue({ taskName: this.tasks[index].name });
   }
